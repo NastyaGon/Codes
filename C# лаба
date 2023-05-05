@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Лаба_6_Гонатаева
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] A = { "AC", "C", "DC", "DS", "MISS", "KEK","BIC", "LOL" };
+            /*var selectedA = from C in A // передаем каждый элемент из people в переменную p
+                                 where C.ToUpper().EndsWith("C") //фильтрация по критерию
+                                 orderby C  // упорядочиваем по возрастанию
+                                 select C; // выбираем объект в создаваемую коллекцию */
+var selecteda = A.Where(A => A.ToUpper().EndsWith("C")).OrderBy(A => A);
+            try
+            {
+                int numberOfa = A.Count();
+                if (numberOfa == 1)
+                    Console.WriteLine(
+                    "Элемент только один.");
+                else if (numberOfa == 0)
+                    throw new Exception();
+            }
+
+
+            catch (Exception)
+            {
+                Console.WriteLine("Ошибка.Нет элементов");
+            }
+            
+            foreach (string C in selecteda)
+                Console.WriteLine(C);
+                Console.ReadKey();
+
+            List<int> Chisla = new List<int> { 1, 4, 5, 7, 23, 9, 56, 99, 657, 78, 53, 22 };
+            IEnumerable<int> Spisok= Chisla.Select(n => n * (Chisla.IndexOf(n) + 1)).Where(n=>n.ToString().Length==2).Reverse();
+
+            foreach (int C in Spisok)
+                Console.WriteLine(C);
+            Console.ReadKey();
+
+        }
+        
+    }
+}
