@@ -1,0 +1,67 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+/*Исходный список содержит сведения о туристической фирме, об имеющихся в продаже путевках, маршрутах, временах отправления. 
+ Сведения о путевке включают ее стоимость, время отправления, маршрут. Маршрут задается номером и видом (пеший, верховой, водный).
+ Стоимость путевки зависит от сезона.*/
+
+namespace Лаб_7_Гонатаева
+{
+    class Program
+    {
+        class TourFirm
+        {
+            public string name { get; set; } //название фирмы
+            public string way { get; set; } //маршрут
+            public double cost { get; set; } //стоимость путёвки
+            public double time { get; set; } //время отправления
+        }
+
+        static void Main(string[] args)
+        {
+            List<TourFirm> tourfirms = new List<TourFirm>() 	// Объявление пустого списка
+            {
+            new TourFirm
+            {name="Агенство теплых воспоминаний", way="1_Пеший", cost=22000, time=12.00},
+            new TourFirm
+            {name="Приятное путешествие", way="2_Верховой", cost=30000, time=13.00},
+            new TourFirm
+            {name="Когда-то куда-то", way="1_Пеший", cost=24000, time=06.00},
+            new TourFirm
+            {name="В путь!", way="3_Водный", cost=7000, time=10.00},
+            new TourFirm
+            {name="Приятное путешествие", way="2_Верховой", cost=20000, time=15.00},
+            new TourFirm
+            {name="В путь!", way="1_Пеший", cost=3300, time=12.00},
+            new TourFirm
+            {name="Вояж вояж", way="3_Водный", cost=50000, time=11.00},
+            new TourFirm
+            {name="Агенство теплых воспоминаний", way="2_Верховой", cost=23000, time=20.00},
+            new TourFirm
+            {name="Когда-то куда-то", way="3_Водный", cost=40000, time=21.30},
+            new TourFirm
+            {name="В путь!", way="1_Пеший", cost=3300, time=12.00},
+            new TourFirm
+            {name="Приятное путешествие", way="3_Водный", cost=50000, time=11.00},
+            new TourFirm
+            {name="Агенство теплых воспоминаний", way="2_Верховой", cost=23000, time=20.00},
+            };
+
+            var res = tourfirms.OrderBy(x => x.name).GroupBy(x => x.way).Select(x => new { Name = x.Key, tourfirms_l = x.Select(d => new { d.name, d.cost, d.way }).Sum(y=>y.cost)});
+            foreach (var t in res)
+            {
+                Console.WriteLine($" { t.Name} {t.tourfirms_l}");
+                //foreach (var T1 in t.tourfirms_l)
+                //{
+                 //  Console.WriteLine($"Суммарная стоимость путевок по каждому маршруту { T1.name} {T1.cost} {T1.way}");
+
+
+                //}
+            }
+            Console.ReadKey();
+        }
+    }
+}
