@@ -1,0 +1,51 @@
+using System;
+/*Камень бросают по горизонтали с начальной скоростью v с высоты h. 
+Перегрузить знак операции ‘+’ для сложения скорости с числом с целью определения расстояния до точки падения. */
+
+namespace Лаба4
+{
+    class Program
+    {
+        class Kinematika
+        {//obj 1
+            public double h { get; set; }         // высота
+            public double t { get; set; }     // время 
+            public double s { get; set; }     // путь камня
+            public double v { get; set; }     // скорость падения по горизонтали
+            public Kinematika() { }                // Пустой конструктор
+
+            public Kinematika(double h, double t, double v)// конструтор с параметрами
+            {
+                this.h = h;
+                this.t = t;
+                this.s = v*t;
+                this.v = v;
+            }
+
+            public static Kinematika operator + (Kinematika ob1, Kinematika ob2)  // Перегрузка сложения
+            {
+                 
+                Kinematika res = new Kinematika();
+                const double g = 9.81;
+                res.t = Math.Sqrt((2 * (ob1.h+ob2.h)) / g);
+                res.v = ob1.v + ob2.v;
+                res.s = res.v*res.t;
+                        
+                return res;
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            Kinematika kin1, kin2, kin3;
+            kin1 = new Kinematika(23.0,10.0, 34.0);//заполняем объект класса Kinematika с названием kin1 значениями через конструктор
+            kin2= new Kinematika(28.0, 12.0, 48.0);
+            kin3 = new Kinematika();
+            kin3 = kin1 + kin2;
+
+
+            Console.WriteLine($"{kin3.t}, \t {kin3.v}, \t {kin3.s}");
+            Console.ReadKey();
+        }
+    }
+}
