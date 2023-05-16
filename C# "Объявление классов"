@@ -1,0 +1,88 @@
+using System;
+using System.Collections.Generic;
+
+/*Объявить класс, который содержит описание путевого листа для перевозки груза. Атрибуты: название груза, 
+ вес, тип грузовика, пункт назначения, номер автомобиля, фамилия водителя, отметка о доставке.
+Объявление класса должно быть выполнено отдельно двумя способами: с конструктором и со свойствами. 
+Объекты классы могут быть представлены в виде массива или обобщенного списка объектов. 
+Следует реализовать три варианта программы:
+
+Массив объектов классов, инициализация через конструктор.
+
+Массив объектов классов, инициализация через свойства.
+
+Обобщённый список объектов классов, инициализация через свойства.
+
+Описать в виде комментариев возможные запросы к коллекции объектов класса.*/
+
+
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        class Putlist //1.	Объявление класса с конструктором
+        {
+            public Putlist(string grus_Name, int weight, string type_car, string kuda, int nomer_car, string vodit_Name)
+            {
+                this.grus_Name = grus_Name;
+                this.weight = weight;
+                this.type_car = type_car;
+                this.kuda = kuda;
+                this.nomer_car = nomer_car;
+                Vodit_Name = vodit_Name;
+            }
+            public Putlist()
+            {
+
+            }
+
+            public void output()
+            {
+                Console.WriteLine($"{grus_Name} {weight} {type_car} {kuda} {nomer_car} {Vodit_Name}");
+            }
+            public string grus_Name { get; set; }
+            public int weight { get; set; }
+            public string type_car { get; set; }
+            public string kuda { get; set; }
+            public int nomer_car { get; set; }
+            public string Vodit_Name { get; set; }
+
+        }
+        static void Main(string[] args)
+        {
+            Putlist putlist1 = new Putlist();
+            putlist1.grus_Name = "Груз1";
+            putlist1.weight = 34;
+            putlist1.type_car = "Грузовой";
+            putlist1.kuda = "Калачёво";
+            putlist1.nomer_car = 2340;
+            putlist1.Vodit_Name = "Игорь";
+            Putlist putlist2 = new Putlist("Груз2", 83, "легковой", "Нахабино", 2365, "Михаил");
+
+            putlist1.output();
+            putlist2.output();
+            Putlist[] PutlistMas = {
+                new Putlist("Груз3",83, "легковой", "Нахабино", 2365, "Михаил"),
+                new Putlist("Груз4",83, "легковой", "Нахабино", 2365, "Михаил"),
+                new Putlist("Груз5",83, "легковой", "Нахабино", 2365, "Михаил"),
+            };
+            foreach (Putlist pli in PutlistMas)
+            {
+                pli.output();
+            }
+
+            List<Putlist> Putlist_list = new List<Putlist>();
+            Putlist_list.Add(new Putlist("Груз6", 83, "легковой", "Нахабино", 2365, "Михаил"));
+            Putlist_list.Add(new Putlist("Груз7", 83, "легковой", "Нахабино", 2365, "Михаил"));
+            Putlist_list.Add(new Putlist("Груз8", 83, "легковой", "Нахабино", 2365, "Михаил"));
+
+            foreach (Putlist pli in Putlist_list)
+            {
+                pli.output();
+            }
+            Console.ReadKey();
+
+        }
+        }
+}
