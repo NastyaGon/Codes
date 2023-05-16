@@ -1,0 +1,71 @@
+using System;
+using System.Collections.Generic;
+/*Описать класс, содержащий две строки. В одной строке записано имя, а в другой телефон. 
+ * Создать типизированный набор данных (достаточно 3-5 телефонов). 
+ * В базовом классе виртуальная функция выводит телефон по имени. 
+ * В производном классе эта функция переопределяется для вывода по телефону имени.*/
+
+namespace Лаба_5_Гонатаева
+{
+    class Person
+    {
+        public Person(string name, long phone)
+        {
+            Name = name;
+            Phone = phone;
+        }
+
+        public string Name { get; set; }
+        public long Phone { get; set; }
+       
+        public virtual void Print()//Даем доступ на Переопределение метода Print 
+        {
+            Console.WriteLine($"{Name} принадлежит {Phone}");
+            
+        }
+
+    }
+    class PhoneUser : Person
+    {
+        public PhoneUser(string name, long phone) : base(name, phone)
+        {
+            Name = name;
+            Phone = phone;
+        }
+
+        public override void Print()
+        {
+            Console.WriteLine($"{Phone} принадлежит {Name}");
+            
+        }
+
+
+        static void Main(string[] args)
+        {
+
+            List<Person> people = new List<Person> ();
+            Person bob = new Person("Bob", 89163478901);
+            Person alica = new Person("Alica", 89162346867);
+            Person nethan = new Person("Nethan", 89105649887);
+            people.Add(bob);
+            people.Add(alica);
+            people.Add(nethan);
+            foreach (Person p in people)
+            {
+                p.Print();
+            }
+            List<PhoneUser>people2 = new List<PhoneUser>();
+            PhoneUser bob1 = new PhoneUser("Bob", 89163478901);
+            PhoneUser alica1 = new PhoneUser("Alica", 89162346867);
+            PhoneUser nethan1 = new PhoneUser("Nethan", 89105649887);
+            people2.Add(bob1);
+            people2.Add(alica1);
+            people2.Add(nethan1);
+            foreach (PhoneUser p in people2)
+            {
+                p.Print();
+            }
+            Console.ReadKey();
+        }
+    }
+}
